@@ -1,0 +1,1 @@
+# MySQL is a relational database management system (RDBMS) developed by Oracle that uses Structured Query Language (SQL) to manage its data.
