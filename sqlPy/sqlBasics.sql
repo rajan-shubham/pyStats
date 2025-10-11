@@ -44,3 +44,24 @@ select Lower(`First Name`) as Names from employees;
 select left(name, 4) as username from customers;
 select right(name, 4) as username from customers;
 select mid(name, 2, 5) as username from customers; -- 2 se 5 character in length i want
+
+
+-- data aggregation (numeric functions)
+-- order count in a hotel, total no. of customers, max min avg payments
+select sum(Salary) as amountSpentPerMonth from employees;
+select count(`First Name`) as totalEmployees from employees;
+select avg(Salary) as avgSalary from employees;
+select max(Salary) as highestSalary from employees;
+select min(Salary) as lowestSalary from employees;
+select truncate(`Bonus %`, 1) as aDecimalSalary from employees; -- make to one decimal places
+select ceil(`Bonus %`) as roundedOffBonus from employees; -- rounded to higher values
+select floor(`Bonus %`) as roundedOffBonus from employees; -- rounded to lower values
+
+
+-- date functions 
+select * from employees;
+select date(`Start Date`) as joiningDates from employees;
+select time(`Start Date`) as joiningDates from employees;
+select datediff(`End Date`, `Start Date`) as empWorkingYear from employees;
+select dayname(`Start Date`) as dayOfJoining from employees;
+select month(`Start Date`) as monthOfJoining from employees;
