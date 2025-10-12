@@ -65,3 +65,34 @@ select time(`Start Date`) as joiningDates from employees;
 select datediff(`End Date`, `Start Date`) as empWorkingYear from employees;
 select dayname(`Start Date`) as dayOfJoining from employees;
 select month(`Start Date`) as monthOfJoining from employees;
+
+
+-- case operator
+select * from products;
+select avg(`Stock Quantity`) as avgStockQuantity from products;
+select `Product Name`, `Stock Quantity`,
+case
+	when `Stock Quantity` < 50 then "Urgent need of more stock"
+    else "no requirement as of now"
+end as production_details
+from products;
+
+select * from products order by `Product Ratings` asc;
+select avg(`Price`) as avgRating from products; -- 254.67
+select max(`Price`) as avgRating from products; -- 499.97
+select min(`Price`) as avgRating from products; -- 10.22
+select `Product Name`, Price,
+case
+	when Price <= 200 then "cheap product"
+    when Price > 200 and Price <= 300 then "average product"
+    else "expensive product"
+end as productMarket
+from products;
+
+
+-- Group By -> when you want to see your data in ceratain groups
+select * from employees;
+select Team, count(`First Name`) as noOfEmployees from employees group by Team;
+select Gender, count(`First Name`) as noOfEmployees from employees group by Gender order by count(`First Name`) asc;
+select * from products;
+select `Product Category`, count(`Product ID`)as productVerity from products group by `Product Category`order by count(`Product ID`) desc;
