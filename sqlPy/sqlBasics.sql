@@ -96,3 +96,15 @@ select Team, count(`First Name`) as noOfEmployees from employees group by Team;
 select Gender, count(`First Name`) as noOfEmployees from employees group by Gender order by count(`First Name`) asc;
 select * from products;
 select `Product Category`, count(`Product ID`)as productVerity from products group by `Product Category`order by count(`Product ID`) desc;
+
+
+-- Having clause (used as agg fun ke saath ham where clause ka use nahi kar sakte hai)
+-- have clause is used by -> group by
+select Team, count(`First Name`) as noOfEmployees from employees group by Team having count(`First Name`) > 95;
+select `Product Category`, count(`Product ID`)as productVerity from products group by `Product Category` having count(`Product ID`) > 3300 order by count(`Product ID`) desc;
+
+
+-- JOINS (INNER, LEFT, RIGHT, CROSS)
+-- ex tables in databases are of products, customers, orders, delivery
+-- to build relationships among these data/tables we use joins
+-- to extract data from multiple tables simultaneously
