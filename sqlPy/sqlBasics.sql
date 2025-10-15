@@ -108,3 +108,12 @@ select `Product Category`, count(`Product ID`)as productVerity from products gro
 -- ex tables in databases are of products, customers, orders, delivery
 -- to build relationships among these data/tables we use joins
 -- to extract data from multiple tables simultaneously
+use HomeRental;
+select * from Client;
+select * from Branch;
+select * from Registration;
+select * from Staff;
+
+select Client.clientNo, Client.fName, Registration.staffNo from Client
+inner join Registration
+on Client.clientNo = Registration.clientNo;
