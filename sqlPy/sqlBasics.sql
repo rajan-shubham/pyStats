@@ -108,12 +108,21 @@ select `Product Category`, count(`Product ID`)as productVerity from products gro
 -- ex tables in databases are of products, customers, orders, delivery
 -- to build relationships among these data/tables we use joins
 -- to extract data from multiple tables simultaneously
+-- make relationships on the basis of common column(Primary & Foreign Key)
 use HomeRental;
 select * from Client;
 select * from Branch;
 select * from Registration;
 select * from Staff;
 
+-- inner joins says we find columns which have common elements(Two table common data)
 select Client.clientNo, Client.fName, Registration.staffNo from Client
 inner join Registration
 on Client.clientNo = Registration.clientNo;
+
+-- left join -> left ka sara data milega but right ka sirf matched data hi milega
+-- right join -> right ka sara data milega but left ke sirf matched data hi milega
+-- corss join -> from both the table you will get whole the data
+select * from Client cross join Registration;
+select * from Client cross join Registration on Client.clientNo = Registration.clientNo;
+-- if in any case you have data in left but not in right table then cross join yield null in the resulted columns after join
