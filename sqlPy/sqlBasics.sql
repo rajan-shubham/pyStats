@@ -126,3 +126,17 @@ on Client.clientNo = Registration.clientNo;
 select * from Client cross join Registration;
 select * from Client cross join Registration on Client.clientNo = Registration.clientNo;
 -- if in any case you have data in left but not in right table then cross join yield null in the resulted columns after join
+
+
+-- set operator (union, union all, intersect, except)
+-- we have two tables and sayad dono ke ander same data ho sakta hai, to unke uper ham set operation lagate hai
+
+
+-- subqueries (outer + inner quaries) inner quaries execute first
+select * from employees;
+select avg(Salary) as averageSalary from employees;
+-- finding employees name whose salary greater then avg salary
+select * from employees where Salary > 90662;
+select * from employees where Salary > (select avg(Salary) from employees);
+select employee1.Firstname, employee1.Department from employeedb.employee1 where employee1.FirstName in (select employee2.FirstName from employeedb.employee2);
+select employee1.Firstname, employee1.Department from employeedb.employee1 where employee1.FirstName not in (select employee2.FirstName from employeedb.employee2);
