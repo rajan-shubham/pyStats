@@ -140,3 +140,86 @@ select * from employees where Salary > 90662;
 select * from employees where Salary > (select avg(Salary) from employees);
 select employee1.Firstname, employee1.Department from employeedb.employee1 where employee1.FirstName in (select employee2.FirstName from employeedb.employee2);
 select employee1.Firstname, employee1.Department from employeedb.employee1 where employee1.FirstName not in (select employee2.FirstName from employeedb.employee2);
+
+
+
+-- views -> it is virtual table (sirf apne hisab se dekhne ke liye kuch data fetch)
+select * from customers;
+
+create view count_of_customer_in_state as
+select state, count(id) as noOfCustomer from customers group by state;
+
+create view California_data as
+select id, name, city from customers where state='California';
+
+
+-- Stored Procedure : it works like function and we have to call it for there execution, here we have also pass parameter values
+Delimiter &&
+create procedure getProductData()
+begin
+	select * from analEmployee.products;
+end &&
+Delimiter ;
+
+call analEmployee.getProductData();
+
+-- parameter type -> in, out, inout
+Delimiter &&
+create procedure getLimit(in var int)
+begin
+	select * from analEmployee.products limit var;
+end &&
+Delimiter ;
+
+call analEmployee.getLimit(6); -- starting ke 6 value hame chahiye
+
+-- out : kisi bhi value ko nikal ke store karwana
+Delimiter &&
+create procedure getProductMaxPrice(out var int)
+begin
+	select max(Price) into var from analEmployee.products;
+end &&
+Delimiter ;
+
+call analEmployee.getProductMaxPrice(@m);
+select @m;
+
+-- inout
+-- Drop the old procedure if it exists
+DROP PROCEDURE IF EXISTS getProductNameById;
+
+-- Re-create the procedure
+DELIMITER &&
+CREATE PROCEDURE getProductNameById(
+    IN  product_id_in VARCHAR(50),  -- IN parameter for the ID
+    OUT product_name_out VARCHAR(255) -- OUT parameter for the name
+)
+BEGIN
+    -- Use `SELECT ... INTO ...` to assign the value to the OUT parameter
+    -- Use backticks (`) for column names with spaces
+    SELECT `Product Name`
+    INTO product_name_out
+    FROM analEmployee.products
+    WHERE `Product ID` = product_id_in;
+END &&
+DELIMITER ;
+
+-- ---
+-- How to call the new procedure
+-- ---
+
+-- 1. Set your input ID
+SET @id = '93TGNAY7';
+
+-- 2. Initialize your output variable (good practice)
+SET @name = NULL;
+
+-- 3. Call the procedure, passing both variables
+CALL analEmployee.getProductNameById(@id, @name);
+
+-- 4. Select the output variable to see the result
+SELECT @name;
+
+
+
+-- window function we can create partition kisi bhi chig ke basis ke uper
